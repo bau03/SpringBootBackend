@@ -1,10 +1,7 @@
 package com.innova.controller;
 
 import com.innova.constants.ErrorCodes;
-import com.innova.dto.request.ChangeForm;
-import com.innova.dto.request.ChangePasswordForm;
-import com.innova.dto.request.ForgotAndChangePasswordForm;
-import com.innova.dto.request.LogoutForm;
+import com.innova.dto.request.*;
 import com.innova.dto.response.SuccessResponse;
 import com.innova.event.OnRegistrationSuccessEvent;
 import com.innova.exception.BadRequestException;
@@ -16,9 +13,11 @@ import com.innova.model.User;
 import com.innova.repository.ActiveSessionsRepository;
 import com.innova.repository.TokenBlacklistRepository;
 import com.innova.repository.UserRepository;
+import com.innova.repository.WriteRepository;
 import com.innova.security.jwt.JwtProvider;
 import com.innova.security.services.UserDetailImpl;
 import com.innova.service.UserServiceImpl;
+import com.innova.service.WriterService;
 import com.innova.util.PasswordUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +58,13 @@ public class UserController {
     JwtProvider jwtProvider;
 
     @Autowired
+    WriteRepository writeRepository;
+
+    @Autowired
     private ApplicationEventPublisher eventPublisher;
+
+    @Autowired
+    WriterService writerService;
 
     @GetMapping("/")
     public ResponseEntity<?> getUser() {
@@ -192,4 +197,13 @@ public class UserController {
         }
 
     }
+
+    @PostMapping("/writer")
+    public ResponseEntity<?> createNewWrite(@RequestBody WriterForm writerForm) {
+        writerService.save(writerForm);
+        SuccessResponse response = new SuccessResponse(HttpStatus.OK,
+                "Yazarlık başvurusu alındı");
+        return new ResponseEntity<>(response, new HttpHeaders(), response.getStatus());
+    }
+
 }

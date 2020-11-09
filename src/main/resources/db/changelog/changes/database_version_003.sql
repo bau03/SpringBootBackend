@@ -49,3 +49,12 @@ create table if not exists  "active_sessions" (
     expire_date timestamp without time zone NOT NULL,
     user_id int not null references cloud_users(id)
 );
+
+create table if not exists "writer_user"(
+ id    serial primary key,
+ job varchar (255),
+ education varchar(255),
+ biography varchar(255),
+ timestap date ,
+ user_id int not null references cloud_users(id)
+);
