@@ -58,9 +58,6 @@ public class UserController {
     JwtProvider jwtProvider;
 
     @Autowired
-    WriteRepository writeRepository;
-
-    @Autowired
     private ApplicationEventPublisher eventPublisher;
 
     @Autowired
@@ -205,5 +202,17 @@ public class UserController {
                 "Yazarlık başvurusu alındı");
         return new ResponseEntity<>(response, new HttpHeaders(), response.getStatus());
     }
+    @GetMapping("/writer/detail")
+    public ResponseEntity<?> getAllWriter() {
+        return ResponseEntity.ok().body(writerService.getWriter());
+    }
 
+    @PutMapping("/writer/edit")
+    public ResponseEntity<?> editUserRole(@Valid @RequestBody EditUserRoleForm editUserRoleForm) {
+        System.out.print("gelen"+editUserRoleForm);
+        writerService.editUserRole(editUserRoleForm);
+        SuccessResponse response = new SuccessResponse(HttpStatus.OK,
+                "Kullanıcı rolü güncellendi");
+        return new ResponseEntity<>(response, new HttpHeaders(), response.getStatus());
+    }
 }
