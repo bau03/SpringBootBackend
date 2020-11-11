@@ -10,10 +10,7 @@ import com.innova.exception.UnauthorizedException;
 import com.innova.model.ActiveSessions;
 import com.innova.model.TokenBlacklist;
 import com.innova.model.User;
-import com.innova.repository.ActiveSessionsRepository;
-import com.innova.repository.TokenBlacklistRepository;
-import com.innova.repository.UserRepository;
-import com.innova.repository.WriteRepository;
+import com.innova.repository.*;
 import com.innova.security.jwt.JwtProvider;
 import com.innova.security.services.UserDetailImpl;
 import com.innova.service.UserServiceImpl;
@@ -216,4 +213,5 @@ public class UserController {
                 "Kullanıcı rolü güncellendi");
         return new ResponseEntity<>(response, new HttpHeaders(), response.getStatus());
     }
+
 }
