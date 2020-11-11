@@ -52,7 +52,9 @@ public class WriterService {
     public List<Writer> getWriter(){
         return writeRepository.findAll();
     }
+
     public void editUserRole( EditUserRoleForm editUserRoleForm){
+        if(editUserRoleForm.getId()!=null){
         User user = userRepository.findById(Integer.parseInt(editUserRoleForm.getId())).orElseThrow(() -> new BadRequestException("No such user", ErrorCodes.NO_SUCH_USER));
         Set<Role> roles = new HashSet<>();
         Role userRole = roleRepository.findByRole(Roles.ROLE_PM)
@@ -60,6 +62,14 @@ public class WriterService {
         roles.add(userRole);
         user.setRoles(roles);
         userRepository.save(user);
+                 if(userRepository.existsByUsername(user.getUsername())){
+                writeRepository.deleteById(Integer.parseInt(editUserRoleForm.getWriterid()));
+            }
+        }
+        else if(editUserRoleForm.getId()==null && editUserRoleForm.getWriterid()!=null){
+            writeRepository.deleteById(Integer.parseInt(editUserRoleForm.getWriterid()));
+        }
+
     }
 
 }

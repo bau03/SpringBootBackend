@@ -25,6 +25,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -202,14 +203,14 @@ public class UserController {
                 "Yazarlık başvurusu alındı");
         return new ResponseEntity<>(response, new HttpHeaders(), response.getStatus());
     }
+    @PreAuthorize("hasRole ('ROLE_ADMIN')")
     @GetMapping("/writer/detail")
     public ResponseEntity<?> getAllWriter() {
         return ResponseEntity.ok().body(writerService.getWriter());
     }
-
+    @PreAuthorize("hasRole ('ROLE_ADMIN')")
     @PutMapping("/writer/edit")
     public ResponseEntity<?> editUserRole(@Valid @RequestBody EditUserRoleForm editUserRoleForm) {
-        System.out.print("gelen"+editUserRoleForm);
         writerService.editUserRole(editUserRoleForm);
         SuccessResponse response = new SuccessResponse(HttpStatus.OK,
                 "Kullanıcı rolü güncellendi");
