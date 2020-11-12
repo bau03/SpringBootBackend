@@ -8,6 +8,8 @@ import com.innova.repository.CategoryRepository;
 import com.innova.repository.ContentRepository;
 import com.innova.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +42,12 @@ public class ContentService {
         content.setTimestap(new Date());
         contentRepository.save(content);
     }
-    public List<Content> getContent(){
-        return contentRepository.findAll();
+
+    public Page<Content> getContentPage(Pageable pageable){
+        return contentRepository.findAll(pageable);
+    }
+    public Page<Content> getCategoryContentPage(String categoryName,Pageable pageable){
+        Category category=categoryServices.getCategory(categoryName);
+        return contentRepository.findByCategory(category,pageable);
     }
 }

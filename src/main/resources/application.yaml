@@ -30,6 +30,11 @@ spring:
             scope:
               - email
               - profile
+  data:
+    web:
+      pageable:
+        page-parameter: "currentPage"
+        size-parameter: "pageSize"
 
 innova:
   app:
