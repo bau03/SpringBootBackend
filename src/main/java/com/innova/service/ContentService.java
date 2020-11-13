@@ -13,8 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContentService {
@@ -50,4 +52,9 @@ public class ContentService {
         Category category=categoryServices.getCategory(categoryName);
         return contentRepository.findByCategory(category,pageable);
     }
+    public List<Content> getContent(String contentId){
+        System.out.println(contentId);
+        return contentRepository.findAllById(Integer.parseInt(contentId));
+    }
+
 }

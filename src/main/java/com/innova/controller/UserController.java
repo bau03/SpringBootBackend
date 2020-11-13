@@ -200,11 +200,13 @@ public class UserController {
                 "Yazarlık başvurusu alındı");
         return new ResponseEntity<>(response, new HttpHeaders(), response.getStatus());
     }
+
     @PreAuthorize("hasRole ('ROLE_ADMIN')")
     @GetMapping("/writer/detail")
     public ResponseEntity<?> getAllWriter() {
         return ResponseEntity.ok().body(writerService.getWriter());
     }
+
     @PreAuthorize("hasRole ('ROLE_ADMIN')")
     @PutMapping("/writer/edit")
     public ResponseEntity<?> editUserRole(@Valid @RequestBody EditUserRoleForm editUserRoleForm) {

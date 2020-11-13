@@ -45,4 +45,8 @@ public class ContentController {
     Page<Content> getCategoryContents(@PathVariable String categoryName,@PageableDefault(sort="id", direction = Sort.Direction.DESC) Pageable pageable){
         return contentService.getCategoryContentPage(categoryName,pageable);
     }
+    @GetMapping("/view/{contentId}")
+    public ResponseEntity<?> getContent(@PathVariable String contentId){
+        return ResponseEntity.ok().body(contentService.getContent(contentId));
+    }
 }
