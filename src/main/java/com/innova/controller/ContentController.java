@@ -33,20 +33,40 @@ public class ContentController {
                 "İçerik eklendi");
         return new ResponseEntity<>(response, new HttpHeaders(), response.getStatus());
     }
+
     @GetMapping("/category")
     public ResponseEntity<?> getAllWriter() {
         return ResponseEntity.ok().body(categoryServices.getCategoryDetail());
     }
+
     @GetMapping("/contents")
     Page<Content> getContents(@PageableDefault(sort="id", direction = Sort.Direction.DESC) Pageable pageable){
         return contentService.getContentPage(pageable);
     }
+
     @GetMapping("/contents/{categoryName}")
     Page<Content> getCategoryContents(@PathVariable String categoryName,@PageableDefault(sort="id", direction = Sort.Direction.DESC) Pageable pageable){
         return contentService.getCategoryContentPage(categoryName,pageable);
     }
+
     @GetMapping("/view/{contentId}")
     public ResponseEntity<?> getContent(@PathVariable String contentId){
         return ResponseEntity.ok().body(contentService.getContent(contentId));
+   }
+
+    @PostMapping("/like/{contentId}")
+    public ResponseEntity<?> postLike(@PathVariable String contentId){
+        contentService.saveLike(contentId);
+        SuccessResponse response = new SuccessResponse(HttpStatus.OK,
+                "Like");
+        return new ResponseEntity<>(response, new HttpHeaders(), response.getStatus());
+    }
+
+    @PostMapping("/dislike/{contentId}")
+    public ResponseEntity<?> postDislike(@PathVariable String contentId){
+        contentService.saveDislike(contentId);
+        SuccessResponse response = new SuccessResponse(HttpStatus.OK,
+                "Dislike");
+        return new ResponseEntity<>(response, new HttpHeaders(), response.getStatus());
     }
 }

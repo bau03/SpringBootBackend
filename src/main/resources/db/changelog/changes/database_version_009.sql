@@ -68,7 +68,21 @@ create table if not exists "content"(
  id    serial primary key,
  user_id int not null references cloud_users(id),
  category_id int not null references content_category(id),
- content varchar(255),
+ content varchar,
+ contentHeader varchar(60),
  timestap date
+);
 
+create table if not exists "content_like"(
+ id    serial primary key,
+ content_id int not null references  content(id),
+ user_id int not null references cloud_users(id),
+ timestap date
+);
+
+create table if not exists "content_dislike"(
+ id    serial primary key,
+ content_id int not null references  content(id),
+ user_id int not null references cloud_users(id),
+ timestap date
 );

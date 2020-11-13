@@ -9,6 +9,17 @@ public class ContentForm {
     @Column(name = "category_id")
     private String categoryId;
 
+    @Column(name="contentHeader")
+    private String contentHeader;
+
+    public String getContentHeader() {
+        return contentHeader;
+    }
+
+    public void setContentHeader(String contentHeader) {
+        this.contentHeader = contentHeader;
+    }
+
     public String getContent() {
         return content;
     }

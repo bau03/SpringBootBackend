@@ -13,5 +13,5 @@ import java.util.List;
 public interface ContentRepository extends JpaRepository<Content, String> {
 Page<Content> findByCategory(Category category, Pageable pageable);
 List<Content> findAllById(Integer contentId);
-
+Content findById(Integer contentId);
 }

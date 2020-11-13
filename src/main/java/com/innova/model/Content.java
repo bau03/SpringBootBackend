@@ -14,7 +14,7 @@ public class Content {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnoreProperties(value = {"id","enabled","phoneNumber","age","activeSessions","email","password","roles",})
+    @JsonIgnoreProperties(value = {"id","enabled","phoneNumber","age","activeSessions","email","password","roles","username"})
     private User user;
 
     @ManyToOne
@@ -24,13 +24,25 @@ public class Content {
     @Column(name="content")
     private String content;
 
+    @Column(name="contentHeader")
+    private String contentHeader;
+
     private Date timestap;
+
+    public String getContentHeader() {
+        return contentHeader;
+    }
+
+    public void setContentHeader(String contentHeader) {
+        this.contentHeader = contentHeader;
+    }
 
     public Content(){
 
     }
-    public Content(String content){
+    public Content(String content,String contentHeader){
         this.content = content;
+        this.contentHeader=contentHeader;
     }
 
     public Integer getId() {
