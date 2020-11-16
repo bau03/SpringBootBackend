@@ -3638,7 +3638,7 @@ const OAuth2RedirectHandler = props => {
     dispatch(Object(_internship_store_authentication__WEBPACK_IMPORTED_MODULE_3__["googleLogin"])());
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
       to: {
-        pathname: 'https://socialteam.herokuapp.com',
+        pathname: '/',
         state: {
           from: props.location
         }
