@@ -2481,11 +2481,9 @@ const Routes = (_ref) => {
     path: "/auth",
     component: _pages__WEBPACK_IMPORTED_MODULE_2__["OAuth2RedirectHandler"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    exact: true,
-    path: "https://socialteam.herokuapp.com//mailsuccess",
+    path: "/mailsuccess",
     component: _pages__WEBPACK_IMPORTED_MODULE_2__["MailSuccessPage"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    exact: true,
     path: "/mailerror",
     component: _pages__WEBPACK_IMPORTED_MODULE_2__["MailErrorPage"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
