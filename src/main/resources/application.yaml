@@ -48,6 +48,6 @@ innova:
     jwtPasswordTokenExpiration: 1800000
   oauth2:
     authorizedRedirectUris:
-      - https://socialteam.herokuapp.com/#/auth
+      - https://socialteam.herokuapp.com/auth
 
 captcha_server_key: 6LcQ1tIZAAAAAIpcuDo0eEh8UtK0sDZ6lshWmY6N
