@@ -3805,7 +3805,9 @@ const Profile = () => {
     onClick: () => setWriterInfo(false)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_8__["FontAwesomeIcon"], {
     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faTimes"]
-  })), (detail === null || detail === void 0 ? void 0 : detail.authorities[0]['authority']) === 'ROLE_USER' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profilePageComponents__WEBPACK_IMPORTED_MODULE_1__["Writer"], null)) : null, (detail === null || detail === void 0 ? void 0 : detail.authorities[0]['authority']) === 'ROLE_ADMIN' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profilePageComponents__WEBPACK_IMPORTED_MODULE_1__["AdminWriterConfirmation"], null)) : null, (detail === null || detail === void 0 ? void 0 : detail.authorities[0]['authority']) === 'ROLE_PM' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profilePageComponents__WEBPACK_IMPORTED_MODULE_1__["CreateContent"], null)) : null) : null)));
+  })), (detail === null || detail === void 0 ? void 0 : detail.authorities[0]['authority']) === 'ROLE_USER' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profilePageComponents__WEBPACK_IMPORTED_MODULE_1__["Writer"], null)) : null, (detail === null || detail === void 0 ? void 0 : detail.authorities[0]['authority']) === 'ROLE_ADMIN' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profilePageComponents__WEBPACK_IMPORTED_MODULE_1__["AdminWriterConfirmation"], null)) : null, (detail === null || detail === void 0 ? void 0 : detail.authorities[0]['authority']) === 'ROLE_PM' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_profilePageComponents__WEBPACK_IMPORTED_MODULE_1__["CreateContent"], {
+    setWriterInfo: setWriterInfo
+  })) : null) : null)));
 };
 
 /***/ }),
@@ -4380,24 +4382,38 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const CreateContent = () => {
+const CreateContent = ({
+  setWriterInfo
+}) => {
   const {
     handleSubmit,
     register,
-    getValues
+    getValues,
+    errors
   } = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_3__["useForm"])();
   const {
     isSuccessRequired
   } = Object(_internship_shared_hooks__WEBPACK_IMPORTED_MODULE_8__["useTemporary"])();
+  const [show, setShow] = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true);
   const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["useDispatch"])();
 
   const onSubmit = values => {
     const firstPassword = getValues()['categoryId'];
     console.log(firstPassword);
     dispatch(_internship_store_authentication__WEBPACK_IMPORTED_MODULE_5__["contentAsync"].request(values));
+    setShow(false);
+    setWriterInfo(false);
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Create Content")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Accordion"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Accordion"].Toggle, {
+  const handleClose = () => {
+    setWriterInfo(false);
+    setShow(false);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_internship_ui__WEBPACK_IMPORTED_MODULE_2__["Popup"], {
+    show: show,
+    onHide: handleClose
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Create Content")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Accordion"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Accordion"].Toggle, {
     as: _internship_ui__WEBPACK_IMPORTED_MODULE_2__["Button"],
     variant: "link",
     eventKey: "0"
@@ -4407,15 +4423,15 @@ const CreateContent = () => {
     eventKey: "0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Card"].Body, null, "Yeni bir i\xE7erik olu\u015Fturmak i\xE7in ilgili kategoriyi \u015Fe\xE7iniz.")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Form"], {
     onSubmit: handleSubmit(onSubmit)
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Form"].Group, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Form"].Group, {
     as: react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Row"],
     controlId: "categoryId"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Form"].Label, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Form"].Label, {
     column: true,
-    sm: 2
-  }, "Category"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Col"], {
-    sm: 4
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Form"].Control, {
+    sm: 2,
+    className: "ml-3"
+  }, "Category")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Form"].Control, {
+    className: "form-control mt-2",
     as: "select",
     name: "categoryId",
     ref: register({
@@ -4423,29 +4439,42 @@ const CreateContent = () => {
     })
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: "1"
-  }, "Sa\u011Fl\u0131k"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-    value: "2"
   }, "Bilim"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-    value: "3"
+    value: "2"
   }, "Teknoloji"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "3"
+  }, "Oyun"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: "4"
-  }, "Oyun")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Form"].Group, {
-    as: react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Row"],
+  }, "E\u011Fitim"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "5"
+  }, "Sa\u011Fl\u0131k"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Form"].Group, {
+    controlId: "contentHeader"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Form"].Label, {
+    column: true,
+    sm: 0
+  }, "Content Header"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_internship_ui__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+    className: "ml-3 mt-2",
+    type: "text",
+    name: "contentHeader",
+    ref: register({
+      required: true
+    }),
+    errors: errors
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Form"].Group, {
     controlId: "content"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Form"].Label, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Form"].Label, {
     column: true,
     sm: 2
-  }, "Content"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Col"], {
-    sm: 4
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
-    className: "form-control",
-    id: "exampleFormControlTextarea1",
+  }, "Content"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+    className: "form-control ml-3",
     rows: 5,
+    cols: 100,
+    id: "exampleFormControlTextarea1",
     name: "content",
     ref: register({
       required: true
     })
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Row"], {
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Row"], {
     className: "justify-content-center"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_internship_ui__WEBPACK_IMPORTED_MODULE_2__["Button"], {
     type: "submit"
