@@ -1,11 +1,8 @@
 package com.innova.controller;
 
-import com.innova.dto.request.CategoryForm;
 import com.innova.dto.request.ContentForm;
 import com.innova.dto.response.SuccessResponse;
-import com.innova.model.Category;
 import com.innova.model.Content;
-import com.innova.repository.CategoryRepository;
 import com.innova.service.CategoryServices;
 import com.innova.service.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,18 +25,6 @@ public class ContentController {
 
     @Autowired
     CategoryServices categoryServices;
-
-    @Autowired
-    CategoryRepository categoryRepository;
-
-    @PostMapping("/category")
-    public ResponseEntity<?> category(@Valid @RequestBody CategoryForm categoryForm) {
-        Category category= new Category(categoryForm.getCategoryName());
-        categoryRepository.save(category);
-        SuccessResponse response = new SuccessResponse(HttpStatus.OK,
-                "kategori eklendi");
-        return new ResponseEntity<>(response, new HttpHeaders(), response.getStatus());
-    }
 
     @PostMapping("/register")
     public ResponseEntity<?> editUserRole(@Valid @RequestBody ContentForm contentForm) {
