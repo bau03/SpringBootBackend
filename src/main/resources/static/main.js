@@ -298,7 +298,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _interceptors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./interceptors */ "../../../libs/shared/api/src/lib/config/interceptors/index.ts");
 
 
-const baseUrl = 'http://localhost:8080';
+const baseUrl = 'https://socialteam.herokuapp.com';
 const defaultConfig = {
   baseURL: `${baseUrl}/api/`
 };
@@ -557,7 +557,7 @@ const refreshTokenInterceptor = (error, axios = axios__WEBPACK_IMPORTED_MODULE_1
 
   if (error.response.status === 401 && ((_error$response$data = error.response.data) === null || _error$response$data === void 0 ? void 0 : _error$response$data.error.toString()) === 'JWT Expired.') {
     return new Promise(resolve => {
-      axios.get('http://localhost:8080/api/auth/refresh-token', {
+      axios.get('https://socialteam.herokuapp.com/api/auth/refresh-token', {
         params: {
           token: Object(_internship_shared_utils__WEBPACK_IMPORTED_MODULE_0__["getRefreshToken"])()
         }
@@ -2449,7 +2449,7 @@ const Routes = (_ref) => {
   } = _ref,
       props = _objectWithoutProperties(_ref, ["children"]);
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["BrowserRouter"], props, children, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["HashRouter"], props, children, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/",
     component: _pages__WEBPACK_IMPORTED_MODULE_2__["MainPage"]
@@ -3376,7 +3376,7 @@ const Login = () => {
     className: "mb-3 mt-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(StyledAnchorTag, {
     className: "btn btn-outline-dark alert-dismissible",
-    href: "http://localhost:8080/oauth2/authorize/google?redirect_uri=http://localhost:4200/auth"
+    href: "https://socialteam.herokuapp.com/oauth2/authorize/google?redirect_uri=https://socialteam.herokuapp.com/auth"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_8__["FontAwesomeIcon"], {
     icon: _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faGoogle"],
     style: {
@@ -4486,7 +4486,7 @@ const CreateContent = ({
   }, "Oyun"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: "4"
   }, "E\u011Fitim"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-    value: "5"
+    value: "5l"
   }, "Sa\u011Fl\u0131k"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Form"].Group, {
     controlId: "contentHeader"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_0__["Form"].Label, {
