@@ -144,7 +144,7 @@ public class AuthenticationController {
         User user = new User(signUpForm.getUsername(), signUpForm.getEmail(),
                 passwordEncoder.encode(signUpForm.getPassword()));
         Set<Role> roles = new HashSet<>();
-        Role userRole = roleRepository.findByRole(Roles.ROLE_ADMIN)
+        Role userRole = roleRepository.findByRole(Roles.ROLE_USER)
                 .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
         roles.add(userRole);
         user.setRoles(roles);
