@@ -1,10 +1,16 @@
 package com.innova.controller;
 
+import com.innova.dto.request.CategoryForm;
+import com.innova.dto.request.ChangeForm;
 import com.innova.dto.request.ContentForm;
+import com.innova.dto.request.ContentLikeForm;
 import com.innova.dto.response.SuccessResponse;
+import com.innova.model.Category;
 import com.innova.model.Content;
+import com.innova.repository.CategoryRepository;
 import com.innova.service.CategoryServices;
 import com.innova.service.ContentService;
+import liquibase.pro.packaged.C;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -26,11 +32,22 @@ public class ContentController {
     @Autowired
     CategoryServices categoryServices;
 
+    @Autowired
+    CategoryRepository categoryRepository;
+
+    @PostMapping("/categoryadd")
+    public ResponseEntity<?> category(@Valid @RequestBody CategoryForm categoryForm) {
+        Category category=new Category(categoryForm.getCategoryName());
+        categoryRepository.save(category);
+        SuccessResponse response = new SuccessResponse(HttpStatus.OK,
+                "İçerik eklendi");
+        return new ResponseEntity<>(response, new HttpHeaders(), response.getStatus());
+    }
+
     @PostMapping("/register")
     public ResponseEntity<?> editUserRole(@Valid @RequestBody ContentForm contentForm) {
         contentService.save(contentForm);
-        SuccessResponse response = new SuccessResponse(HttpStatus.OK,
-                "İçerik eklendi");
+        SuccessResponse response = new SuccessResponse(HttpStatus.OK, "Successfully content.");
         return new ResponseEntity<>(response, new HttpHeaders(), response.getStatus());
     }
 
@@ -54,17 +71,20 @@ public class ContentController {
         return ResponseEntity.ok().body(contentService.getContent(contentId));
    }
 
-    @PostMapping("/like/{contentId}")
-    public ResponseEntity<?> postLike(@PathVariable String contentId){
-        contentService.saveLike(contentId);
-        SuccessResponse response = new SuccessResponse(HttpStatus.OK,
-                "Like");
-        return new ResponseEntity<>(response, new HttpHeaders(), response.getStatus());
-    }
-
-    @PostMapping("/dislike/{contentId}")
-    public ResponseEntity<?> postDislike(@PathVariable String contentId){
-        contentService.saveDislike(contentId);
+@PutMapping("/like/{contentId}")
+public ResponseEntity<?> editLike(@Valid @PathVariable String contentId) {
+        ContentLikeForm contentLikeForm=new ContentLikeForm();
+        contentLikeForm.setId(contentId);
+        contentService.like(contentLikeForm);
+    SuccessResponse response = new SuccessResponse(HttpStatus.OK,
+            "Like");
+    return new ResponseEntity<>(response, new HttpHeaders(), response.getStatus());
+}
+    @PutMapping("/dislike/{contentId}")
+    public ResponseEntity<?> editDislike(@Valid @RequestBody @PathVariable String contentId) {
+        ContentLikeForm contentLikeForm=new ContentLikeForm();
+        contentLikeForm.setId(contentId);
+        contentService.dislike(contentLikeForm);
         SuccessResponse response = new SuccessResponse(HttpStatus.OK,
                 "Dislike");
         return new ResponseEntity<>(response, new HttpHeaders(), response.getStatus());

@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ContentRepository extends JpaRepository<Content, String> {
+public interface ContentRepository extends JpaRepository<Content, Integer> {
 Page<Content> findByCategory(Category category, Pageable pageable);
 List<Content> findAllById(Integer contentId);
-Content findById(Integer contentId);
+Content findById(int id);
 }
