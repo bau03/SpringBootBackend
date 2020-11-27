@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/content")
 public class ContentController {
@@ -88,5 +90,15 @@ public ResponseEntity<?> editLike(@Valid @PathVariable String contentId) {
         SuccessResponse response = new SuccessResponse(HttpStatus.OK,
                 "Dislike");
         return new ResponseEntity<>(response, new HttpHeaders(), response.getStatus());
+    }
+    @GetMapping("/search/{contentHeader}")
+    public ResponseEntity<?> searchForUsers(@PathVariable String contentHeader,@PageableDefault(sort="id", direction = Sort.Direction.DESC)Pageable pageable) {
+        return ResponseEntity.ok().body(contentService.getSearch(contentHeader,pageable));
+
+    }
+
+    @GetMapping("/trendContent")
+    Page<Content> getTrendContent(@PageableDefault(sort="id", direction = Sort.Direction.DESC) Pageable pageable){
+        return contentService.getTrendContent(pageable);
     }
 }

@@ -26,14 +26,14 @@ public class Content {
     @Column(name="content")
     private String content;
 
-    @Column(name="content_like_number")
-    private Integer content_like_number;
+    @Column(name="contentLikeNumber")
+    private int contentLikeNumber;
 
     @Column(name="comment_number")
-    private Integer comment_number;
+    private int comment_number;
 
     @Column(name="content_dislike_number")
-    private Integer content_dislike_number;
+    private int content_dislike_number;
 
     @Column(name="contentHeader")
     private String contentHeader;
@@ -57,27 +57,27 @@ public class Content {
         this.contentHeader=contentHeader;
     }
 
-    public Integer getComment_number() {
+    public int getComment_number() {
         return comment_number;
     }
 
-    public void setComment_number(Integer comment_number) {
+    public void setComment_number(int comment_number) {
         this.comment_number = comment_number;
     }
 
-    public Integer getContent_like_number() {
-        return content_like_number;
+    public int getContentLikeNumber() {
+        return contentLikeNumber;
     }
 
-    public void setContent_like_number(Integer content_like_number) {
-        this.content_like_number = content_like_number;
+    public void setContentLikeNumber(int contentLikeNumber) {
+        this.contentLikeNumber = contentLikeNumber;
     }
 
-    public Integer getContent_dislike_number() {
+    public int getContent_dislike_number() {
         return content_dislike_number;
     }
 
-    public void setContent_dislike_number(Integer content_dislike_number) {
+    public void setContent_dislike_number(int content_dislike_number) {
         this.content_dislike_number = content_dislike_number;
     }
 

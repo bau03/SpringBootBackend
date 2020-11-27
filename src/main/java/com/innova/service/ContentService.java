@@ -3,12 +3,16 @@ package com.innova.service;
 import com.innova.constants.ErrorCodes;
 import com.innova.dto.request.ContentForm;
 import com.innova.dto.request.ContentLikeForm;
+import com.innova.dto.response.SuccessResponse;
 import com.innova.exception.BadRequestException;
 import com.innova.model.*;
 import com.innova.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +39,7 @@ public class ContentService {
 
     public void save(ContentForm contentForm){
         Content content=new Content(contentForm.getContent(),contentForm.getContentHeader());
-        content.setContent_like_number(0);
+        content.setContentLikeNumber(0);
         content.setContent_dislike_number(0);
         content.setComment_number(0);
         User user = userServiceImpl.getUserWithAuthentication(SecurityContextHolder.getContext().getAuthentication());
@@ -62,7 +66,7 @@ public class ContentService {
         Content content = contentRepository.findById(Integer.parseInt(contentLikeForm.getId()));
         if (contentRepository.existsById(Integer.parseInt(contentLikeForm.getId()))) {
             if (!user.getContentLike().contains(content)) {
-                content.setContent_like_number(content.getContent_like_number()+1);
+                content.setContentLikeNumber(content.getContentLikeNumber()+1);
                 Set<User> userLike = content.getUserLike();
                 userLike.add(user);
                 content.setUserLike(userLike);
@@ -73,7 +77,7 @@ public class ContentService {
                 userRepository.save(user);
             }
             else {
-                content.setContent_like_number(content.getContent_like_number()-1);
+                content.setContentLikeNumber(content.getContentLikeNumber()-1);
                 Set<User> userLike = content.getUserLike();
                 userLike.remove(user);
                 content.setUserLike(userLike);
@@ -119,5 +123,20 @@ public class ContentService {
         else {
             throw new BadRequestException("Something is wrong", ErrorCodes.SOMETHING_IS_WRONG);
         }
+    }
+    public Page<Content> getSearch(String contentHeader,Pageable pageable){
+        Page<Content> content=contentRepository.findAll(contentHeader,pageable);
+        if(content.getContent().size()!=0){
+            return contentRepository.findAll(contentHeader,pageable);
+        }
+        else{
+            throw new BadRequestException("Something is wrong", ErrorCodes.SOMETHING_IS_WRONG);
+        }
+
+    }
+
+    public Page<Content> getTrendContent(Pageable pageable){
+
+        return contentRepository.findByOrderByContentLikeNumberDesc(pageable);
     }
 }

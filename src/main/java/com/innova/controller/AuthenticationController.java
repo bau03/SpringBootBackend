@@ -163,7 +163,7 @@ public class AuthenticationController {
     public ResponseEntity<?> confirmRegistration(@RequestParam("token") String token, HttpServletRequest request)
             throws URISyntaxException {
         if (token == null) {
-            return ResponseEntity.status(HttpStatus.SEE_OTHER).location(URI.create("https://socialteam.herokuapp.com")).build();
+            return ResponseEntity.status(HttpStatus.SEE_OTHER).location(URI.create("https://socialteam.herokuapp.com/#/")).build();
         }
 
         if (token != null && jwtProvider.validateJwtToken(token, "verification", request)) {

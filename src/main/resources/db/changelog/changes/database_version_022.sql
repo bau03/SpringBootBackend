@@ -70,7 +70,7 @@ create table if not exists "content"(
  category_id int not null references content_category(id),
  content varchar,
  contentHeader varchar(60),
- content_like_number int,
+ contentLikeNumber int,
  content_dislike_number int,
  comment_number int,
  timestap date
